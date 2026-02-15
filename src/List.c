@@ -43,3 +43,29 @@ void List_setCapacity(List l, size_t capacity) {
     l->capacity = capacity;
     return;
 }
+
+const void **List_getItems(List l) { return (const void **)l->items; }
+void List_setItems(List l, void **items) {
+    l->items = items;
+    return;
+}
+
+void List_appendItem(List l, void *item) {
+    size_t length = List_getLength(l);
+    size_t capacity = List_getCapacity(l);
+
+    if (length >= capacity) {
+        capacity *= 2;
+        void **oldItems = (void **)List_getItems(l);
+        void **newItems = realloc(oldItems, capacity * sizeof(void *));
+        List_setCapacity(l, capacity);
+        List_setItems(l, newItems);
+    }
+
+    void **items = (void **)List_getItems(l);
+
+    items[length] = item;
+    List_setLength(l, length + 1);
+
+    return;
+}
