@@ -1,5 +1,6 @@
 #include "List.h"
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -77,23 +78,23 @@ void List_setItemAtIndex(List l, size_t index, void *item) {
     return;
 }
 
-void List_realloc(List l) {
-    size_t length = List_getLength(l);
-    size_t capacity = List_getCapacity(l);
-    void **items = (void **)List_getItems(l);
+void List_doubleCapacity(List l) {
+    size_t currentCapacity = List_getCapacity(l);
+    void **currentItems = (void **)List_getItems(l);
 
-    if (length >= capacity) {
-        size_t newCapacity = capacity *= 2;
-        void **newItems = realloc(items, newCapacity * sizeof(void *));
-        List_setCapacity(l, newCapacity);
-        List_setItems(l, newItems);
-    }
+    size_t newCapacity = currentCapacity *= 2;
+    void **newItems = realloc(currentItems, newCapacity * sizeof(void *));
+
+    List_setCapacity(l, newCapacity);
+    List_setItems(l, newItems);
 
     return;
 }
 
 void List_appendItem(List l, void *item) {
-    List_realloc(l);
+    if (List_isAtCapacity(l)) {
+        List_doubleCapacity(l);
+    }
 
     size_t length = List_getLength(l);
 
