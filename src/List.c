@@ -82,7 +82,7 @@ void List_doubleCapacity(List l) {
     size_t currentCapacity = List_getCapacity(l);
     void **currentItems = (void **)List_getItems(l);
 
-    size_t newCapacity = currentCapacity *= 2;
+    size_t newCapacity = currentCapacity * 2;
     void **newItems = realloc(currentItems, newCapacity * sizeof(void *));
 
     List_setCapacity(l, newCapacity);
