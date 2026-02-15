@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdbool.h>
 #include <stddef.h>
 
 typedef struct List *List;
@@ -14,3 +15,5 @@ size_t List_getCapacity(List l);
 void *List_getItemAtIndex(List l, size_t index);
 
 void List_appendItem(List l, void *item);
+
+bool List_isAtCapacity(List l);

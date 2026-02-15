@@ -102,3 +102,10 @@ void List_appendItem(List l, void *item) {
 
     return;
 }
+
+bool List_isAtCapacity(List l) {
+    size_t length = List_getLength(l);
+    size_t capacity = List_getCapacity(l);
+
+    return length == capacity;
+}
