@@ -5,6 +5,7 @@
 typedef struct List *List;
 
 List List_create(void);
+List List_createFromItems(void **items, size_t itemsLength);
 void List_destroy(List l);
 
 size_t List_getLength(List l);

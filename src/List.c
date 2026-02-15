@@ -20,6 +20,21 @@ List List_create(void) {
     return l;
 }
 
+List List_createFromItems(void **items, size_t itemsLength) {
+    List l = malloc(sizeof(struct List));
+    size_t length = itemsLength;
+    size_t capacity = itemsLength * 2;
+
+    l->length = length;
+    l->items = malloc(capacity * sizeof(void *));
+
+    for (size_t i = 0; i < length; i++) {
+        l->items[i] = items[i];
+    }
+
+    return l;
+}
+
 void List_destroy(List l) {
     if (l == NULL) {
         free(l);
