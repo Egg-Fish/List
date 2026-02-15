@@ -65,18 +65,29 @@ void List_setItems(List l, void **items) {
     return;
 }
 
-void List_appendItem(List l, void *item) {
+void *List_getItemAtIndex(List l, size_t index) {
+    return (void *)List_getItems(l)[index];
+}
+
+void List_realloc(List l) {
     size_t length = List_getLength(l);
     size_t capacity = List_getCapacity(l);
+    void **items = (void **)List_getItems(l);
 
     if (length >= capacity) {
-        capacity *= 2;
-        void **oldItems = (void **)List_getItems(l);
-        void **newItems = realloc(oldItems, capacity * sizeof(void *));
-        List_setCapacity(l, capacity);
+        size_t newCapacity = capacity *= 2;
+        void **newItems = realloc(items, newCapacity * sizeof(void *));
+        List_setCapacity(l, newCapacity);
         List_setItems(l, newItems);
     }
 
+    return;
+}
+
+void List_appendItem(List l, void *item) {
+    List_realloc(l);
+
+    size_t length = List_getLength(l);
     void **items = (void **)List_getItems(l);
 
     items[length] = item;
