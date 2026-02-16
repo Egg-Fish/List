@@ -22,5 +22,5 @@ enable_testing()
 # Test executables
 
 add_executable(test__List test/List.c)
-target_link_libraries(test__List PRIVATE List)
+target_link_libraries(test__List PRIVATE List unity)
 add_test(NAME Test:List COMMAND test__List)
