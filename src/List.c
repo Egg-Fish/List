@@ -71,9 +71,7 @@ void *List_getItemAtIndex(List l, size_t index) {
 }
 
 void List_setItemAtIndex(List l, size_t index, void *item) {
-    void **items = (void **)List_getItems(l);
-
-    items[index] = item;
+    l->items[index] = item;
 
     return;
 }
