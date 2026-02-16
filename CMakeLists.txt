@@ -15,7 +15,7 @@ target_compile_options(List PRIVATE
 
 # Testing
 
-# add_subdirectory(extern/unity)
+add_subdirectory(extern/unity)
 
 enable_testing()
 
