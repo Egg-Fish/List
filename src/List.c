@@ -16,6 +16,7 @@ List List_create(void) {
     size_t capacity = 8;
 
     l->length = length;
+    l->capacity = capacity;
     l->items = malloc(capacity * sizeof(void *));
 
     return l;
@@ -27,6 +28,7 @@ List List_createFromItems(void **items, size_t itemsLength) {
     size_t capacity = itemsLength * 2;
 
     l->length = length;
+    l->capacity = capacity;
     l->items = malloc(capacity * sizeof(void *));
 
     for (size_t i = 0; i < length; i++) {
